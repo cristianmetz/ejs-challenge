@@ -2,5 +2,8 @@
 
 <h1>Home</h1>
 <p><%= data.homeStartingContent %></p>
-<%= console.log(data.posts) %>
+
+<% data.posts.forEach(item => console.log(item.pTitle));  %>
+
+
 <%- include("partials/footer"); -%>
