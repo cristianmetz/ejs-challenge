@@ -3,7 +3,10 @@
 <h1>Home</h1>
 <p><%= data.homeStartingContent %></p>
 
-<% data.posts.forEach(item => console.log(item.pTitle));  %>
+<% data.posts.forEach(item => { %>
+    <h1><%= item.pTitle %></h1>
+    <p><%= item.pBody %></p>
+<% });  %>
 
 
 <%- include("partials/footer"); -%>

@@ -48,6 +48,7 @@ app.get("/compose", (req, res) => {
   res.render("compose");
 });
 
+
 app.post("/compose", (req, res) => {
 
   const post = {
@@ -64,10 +65,20 @@ app.post("/compose", (req, res) => {
 
 
 
+//route parameter
+app.get('/post/:postId', (req, res) => {
 
+  const requestedTitle = req.params.postId;
 
+  posts.forEach(post => {
+    const storedTitle = post.pTitle;
 
+    if (requestedTitle === storedTitle) {
+      console.log("Match found!");
+    }
+  });
 
+});
 
 
 app.listen(3000, function () {
