@@ -4,8 +4,11 @@
 <p><%= data.homeStartingContent %></p>
 
 <% data.posts.forEach(item => { %>
-    <h1><%= item.pTitle %></h1>
-    <p><%= item.pBody %></p>
+<h1><%= item.pTitle %></h1>
+<p>
+    <%= item.pBody.substring(0, 100)+"..." %>
+    <a href="/post/<%=item.pTitle%>">Read More</a>
+</p>
 <% });  %>
 
 
