@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const ejs = require("ejs");
 // Load the full lodash build.
 var _ = require('lodash');
@@ -8,6 +9,9 @@ const req = require("express/lib/request");
 const {
   redirect
 } = require("express/lib/response");
+//Load dotenv module
+const dotenv = require("dotenv");
+dotenv.config();
 
 
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
@@ -23,6 +27,10 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static("public"));
+
+const apiKey = process.env.MONGODB_ATLAST_PSW
+
+mongoose.connect(`mongodb+srv://admin-cristian:${apiKey}@cluster0.d44wg.mongodb.net/blogDB`);
 
 app.get("/", (req, res) => {
 
@@ -88,6 +96,11 @@ app.get('/post/:postId', (req, res) => {
 });
 
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
+app.listen(port, function() {
+  console.log("Server has started successfully.");
 });
